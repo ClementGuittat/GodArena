@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { CombatService } from '../../_services/combat.service'
+import { CombatService } from '../../_services/combat.service';
+import { Combat } from '../../_models/combat';
 
 @Component({
     selector: 'combats-new',
@@ -8,14 +9,16 @@ import { CombatService } from '../../_services/combat.service'
 export class CombatsNewComponent {
 
     combatService : CombatService;
+    combat : Combat;
 
     constructor (combatService: CombatService){
         this.combatService = combatService;
     }
 
-    addCombat(f){
-      console.log(f);
-        //this.combatService.addCombat(combat);
+    addCombat(combat){
+      console.log(combat);
+        this.combat = new Combat (combat.Date, combat.Lieu, combat.Etat);
+        this.combatService.addCombat(this.combat);
     }
 }
 

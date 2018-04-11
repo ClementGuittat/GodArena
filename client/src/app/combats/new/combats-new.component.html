@@ -1,8 +1,8 @@
 <h3> Voulez-vous ajouter un combat ? </h3>
 
-<form #form="ngForm" (ngSubmit)="addCombat(form.value)" >
-  <input type="text" name="Date" ngModel placeholder="Date" /> <br/>
-  <input type="text" name="Lieu" ngModel placeholder="Lieu" /> <br/>
+<form #combatForm="ngForm" (ngSubmit)="addCombat(combatForm.value)" >
+  <input type="text" name="Date" ngModel placeholder="Date" required/> <br/>
+  <input type="text" name="Lieu" ngModel placeholder="Lieu" required/> <br/>
   <input type="text" name="Etat" ngModel placeholder="Etat" /> <br/>
-  <button type="submit" >Ajouter</button>
+  <button type="submit" [disabled]="!combatForm.form.valid">Ajouter</button>
 </form>

@@ -1,5 +1,5 @@
 <h3>  Derniers combats disputés </h3>
 
 <ul>
-    <li *ngFor= "let combat of lastCombats"> {{combat.info.lieu}} </li>
+    <li *ngFor= "let combat of lastCombats"> {{combat.info.date}} au {{combat.info.lieu}} ({{combat.info.etat}})</li>
 </ul>
