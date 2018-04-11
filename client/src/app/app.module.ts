@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { routing } from './app.routing';
 
 
 import { AppComponent } from './app.component';
@@ -19,7 +22,10 @@ import { CombatService } from './_services/combat.service'
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    routing
   ],
   providers: [CombatService],
   bootstrap: [AppComponent]
