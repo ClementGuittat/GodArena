@@ -1,0 +1,10 @@
+*.js.map
+sftp-config.json
+node_modules/
+*node_modules*
+.jshintrc
+dev-debug.log
+dev-error.log
+src/*.db
+*.db
+*.log
