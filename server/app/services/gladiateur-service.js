@@ -13,6 +13,21 @@ async function getAllGladiateurs() {
 }
 
 /**
+ * Retourne les gladiateurs de ce type
+ *
+ * @return {Promise<Array>} Gladiateur
+ */
+async function getGladiateursByType(typeArray) {
+    logger.verbose('Gladiateur service: recuperer les gladiateurs de type %s', typeArray);
+    let gladiateurList = [];
+    for (const type of typeArray) {
+        const res = await Gladiateur.find({ _type: type });
+        gladiateurList = gladiateurList.concat(res);
+    }
+    return gladiateurList;
+}
+
+/**
  * Créer le gladiateur
  *
  * @param newGladiateur {Gladiateur}
@@ -49,5 +64,6 @@ async function initGladiateurs(tabGladiateurs) {
 module.exports = {
     getAllGladiateurs,
     createGladiateur,
+    getGladiateursByType,
     initGladiateurs
 };

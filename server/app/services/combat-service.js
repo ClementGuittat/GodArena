@@ -13,13 +13,15 @@ async function getAllCombats() {
 }
 
 /**
- * Créer un combat
+ * Créer un combat en mettant des combattants par défaut selon leur type
  *
  * @param newCombat {Combat}
+ * @param type String
  * @return {Promise<Combat>} le combat créé
  */
 async function createCombat(newCombat) {
     logger.verbose('Combat service: creer un combat');
+    //console.log(newCombat);
     let nouveauCombat;
     try {
         nouveauCombat = await newCombat.save();
@@ -27,6 +29,18 @@ async function createCombat(newCombat) {
         logger.warn(err);
     }
     return nouveauCombat;
+}
+
+/**
+ * Retourne le combat correspondant à l'id.
+ *
+ * @return {Promise<Combat>} le combat correspondant
+ */
+async function getCombatById(id) {
+    logger.verbose('Combat service: le combat correspondant à l\'id: %s', id);
+    const combat = await Combat.findOne({ _id: id });
+    if (!combat) logger.warn('Ce comabt n\'existe pas');
+    return combat;
 }
 
 /**
@@ -57,5 +71,6 @@ async function updateCombat(updatedCombat) {
 module.exports = {
     getAllCombats,
     createCombat,
-    updateCombat
+    updateCombat,
+    getCombatById
 };

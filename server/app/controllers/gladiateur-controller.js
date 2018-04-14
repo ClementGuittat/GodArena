@@ -15,6 +15,20 @@ async function getAllGladiateurs(req, res) {
 }
 
 /**
+ * Récupère tous les gladiateurs d'un type particulier
+ *
+ * @param req Requete
+ * @param res Reponse
+ * @return {Promise.<void>} Nothing
+ */
+async function getGladiateursByType(req, res) {
+    const type = JSON.parse(req.query.array);
+    const gladiateur = await gladiateurService.getGladiateursByType(type);
+
+    res.json(gladiateur);
+}
+
+/**
  * Récupère les informations du front et crée un gladiateur selon son type
  *
  * @param req Request
@@ -88,6 +102,7 @@ async function initGladiateurs(req, res) {
 
 module.exports = {
     getAllGladiateurs,
+    getGladiateursByType,
     createGladiateur,
     initGladiateurs
 };

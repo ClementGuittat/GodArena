@@ -7,16 +7,17 @@ const CombatSchema = new mongoose.Schema({
         etat: {
             type: String,
             default: 'En Attente',
-            enum: [ 'En Attente', 'Accepte', 'Cloturer' ]
+            enum: [ 'En Attente', 'Accepté', 'Cloturé' ]
         }
     },
     details: {
+        typeCombattants: { type: [ String ], required: true },
         combattants: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Gladiateur' } ],
         customisation: { type: Boolean, default: false }
     }
 }, { collection: 'Combat' });
 
-CombatSchema.post('findOneAndUpdate', async (combat)=> {
+CombatSchema.post('findOne', async (combat)=> {
     await combat.populate('details.combattants').execPopulate();
 });
 

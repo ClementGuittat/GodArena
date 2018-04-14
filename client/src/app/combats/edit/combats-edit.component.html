@@ -2,12 +2,12 @@
     <mat-card fxFlex="450px" fxFlex.lt-sm="95">
         <mat-card-header fxLayoutAlign="center">
             <section>
-                <h1> Créer un combat </h1>
+                <h1> Modifiez le combat </h1>
             </section>
         </mat-card-header>
         <mat-card-content>
           <form [formGroup]="combatForm" fxLayout="column">
-              <mat-form-field>
+            <mat-form-field>
                   <input matInput placeholder="Le lieu" formControlName="lieu">
               </mat-form-field>
               <mat-form-field>
@@ -15,15 +15,20 @@
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker startView="month"></mat-datepicker>
               </mat-form-field>
-              <mat-form-field>
-                  <mat-select placeholder="TypeCombattants" multiple formControlName="typeCombattants">
-                      <mat-option *ngFor="let genre of combattantTypes" [value]="genre">{{genre}}</mat-option>
-                  </mat-select>
-              </mat-form-field>
-              <mat-checkbox formControlName="custom">Autoriser la customisation</mat-checkbox>
+              <div *ngFor="let type of gladiateurType">
+                <mat-form-field>
+                    <mat-select placeholder= "Choisir un {{type}}" formControlName="combattantsId">
+                      <div *ngFor="let gladiateur of gladiateurList">
+                          <mat-option *ngIf="gladiateur._type === type" [value]="gladiateur._id">
+                            <span>{{gladiateur.identifiant.nom}}</span>
+                          </mat-option>
+                      </div>
+                    </mat-select>
+                </mat-form-field>
+              </div>
               <div fxLayoutAlign="center">
-                    <button fxFlex="50" mat-button type="button" (click)="addCombat()"
-                    [disabled]="!combatForm.valid">Ajouter le Combat</button>
+                    <button fxFlex="50" mat-button type="button" (click)="editCombat()"
+                    [disabled]="!combatForm.valid">Valider le Combat</button>
               </div>
           </form>
         </mat-card-content>

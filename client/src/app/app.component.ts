@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +9,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'GodArena';
 
-  //constructor(private router: Router) {}
+  constructor(private router: Router) {}
 }

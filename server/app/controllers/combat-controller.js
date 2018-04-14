@@ -22,10 +22,23 @@ async function getAllCombats(req, res) {
  * @return {Promise.<void>} Nothing
  */
 async function createCombat(req, res) {
-
     let nouveauCombat = new Combat(req.body);
+    //console.log(nouveauCombat);
     nouveauCombat = await combatService.createCombat(nouveauCombat);
     res.json(nouveauCombat);
+}
+
+/**
+ * Récupérer un combat par son Id
+ *
+ * @param req Request
+ * @param res Response
+ * @return {Promise.<void>} Nothing
+ */
+async function getCombatById(req, res) {
+    const combatId = req.params.id;
+    const combat = await combatService.getCombatById(combatId);
+    res.json(combat);
 }
 
 /**
@@ -49,5 +62,6 @@ async function updateCombat(req, res) {
 module.exports = {
     getAllCombats,
     createCombat,
+    getCombatById,
     updateCombat
 };
