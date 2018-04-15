@@ -16,6 +16,7 @@ export class CombatsEditComponent implements OnInit{
     combat: Combat;
     gladiateurType: string[];
     gladiateurList: Gladiateur[];
+    tabSelected: any[] = [];
 
     constructor (
         private combatService: CombatService,
@@ -29,9 +30,8 @@ export class CombatsEditComponent implements OnInit{
 
     createForm(){
         this.combatForm = this.formBuilder.group({
-            date: new FormControl(''),
+            date: new FormControl('', [Validators.required]),
             lieu: new FormControl('', [Validators.required]),
-            combattantsId: new FormControl('', [Validators.required])
         });
     }
 
@@ -42,23 +42,50 @@ export class CombatsEditComponent implements OnInit{
             this.combatService.getCombat(params['id']).subscribe(combat => {
                 this.combat = combat;
                 this.gladiateurType = this.combat.details.typeCombattants;
+                this.initTabSelected();
 
                 this.combatForm.controls.date.setValue(this.combat.info.date);
                 this.combatForm.controls.lieu.setValue(this.combat.info.lieu);
-                this.combatForm.controls.combattantsId.setValue(this.combat.details.combattants);
                 this.gladiateurService.getGladiateursByType(this.gladiateurType).subscribe(gladiateur=>{
-                    this.gladiateurList = gladiateur;
+                    this.gladiateurList = gladiateur.map(g=>new Gladiateur (g));
                 });
             });
         });
     }
 
+    initTabSelected(){
+        let i = 0;
+        for (let type of this.gladiateurType){
+            this.tabSelected.push(this.combat.details.combattants[i] ? new Gladiateur(this.combat.details.combattants[i]) : "");
+            i++;
+        }
+        console.log(this.tabSelected);
+    }
+
+    isValid(){
+        let good = false;
+        let i =0;
+        for (let type of this.gladiateurType){
+            if (this.tabSelected[i]!=""){
+                good = true;
+            }
+            else {
+                good = false;
+                break;
+            }
+            i++;
+        }
+        return good;
+    }
+
     editCombat() {
         this.combat.info.date = this.combatForm.controls.date.value;
         this.combat.info.lieu = this.combatForm.controls.lieu.value;
-        this.combat.details.combattants = this.combatForm.controls.combattantsId.value;
+        this.combat.details.combattants = this.tabSelected;
+        console.log(this.tabSelected);
         this.combat.info.etat = 'Accepté';
-        this.combatService.updateCombat(this.combat).subscribe(combat=>{
-        });
+        //this.combatService.updateCombat(this.combat).subscribe(combat=>{
+        //});
+        this.router.navigate(['/empereur'] );
     }
 }

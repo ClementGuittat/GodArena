@@ -21,7 +21,6 @@ async function getAllCombats() {
  */
 async function createCombat(newCombat) {
     logger.verbose('Combat service: creer un combat');
-    //console.log(newCombat);
     let nouveauCombat;
     try {
         nouveauCombat = await newCombat.save();
@@ -59,11 +58,6 @@ async function updateCombat(updatedCombat) {
     } catch (err) {
         logger.warn(err);
     }
-    /*try {
-        await dbMongoose.collection('Combat').updateOne(idCombat, updatedCombat);
-    } catch (err) {
-        logger.warn('Erreur lors de la modification d\'un combat');
-    }*/
     return currentCombat;
 }
 

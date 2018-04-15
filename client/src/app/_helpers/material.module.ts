@@ -11,7 +11,9 @@ import {
   MatSelectModule,
   MatToolbarModule,
   MatTableModule,
-  MatIconModule
+  MatIconModule,
+  MatSortModule,
+  MatPaginatorModule
 } from '@angular/material';
 
 @NgModule({
@@ -26,6 +28,8 @@ import {
     MatToolbarModule,
     MatIconModule,
     MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
     FlexLayoutModule
   ]
 })

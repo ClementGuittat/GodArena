@@ -23,7 +23,6 @@ async function getAllCombats(req, res) {
  */
 async function createCombat(req, res) {
     let nouveauCombat = new Combat(req.body);
-    //console.log(nouveauCombat);
     nouveauCombat = await combatService.createCombat(nouveauCombat);
     res.json(nouveauCombat);
 }

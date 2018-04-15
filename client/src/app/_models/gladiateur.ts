@@ -24,8 +24,11 @@ export class Gladiateur {
     identifiant: Identifiant;
     CV: CV;
 
-    constructor (nom: string, age: Number, nbVictoires: Number = 0, enCombat: boolean = false) {
+    /*constructor (nom: string, age: Number, nbVictoires: Number = 0, enCombat: boolean = false) {
       this.identifiant = new Identifiant (nom, age);
       this.CV = new CV (nbVictoires, enCombat);
+    }*/
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
     }
 }

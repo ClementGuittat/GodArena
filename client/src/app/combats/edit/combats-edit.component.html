@@ -15,9 +15,10 @@
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker startView="month"></mat-datepicker>
               </mat-form-field>
-              <div *ngFor="let type of gladiateurType">
+              <div *ngFor="let type of gladiateurType;let i=index ">
                 <mat-form-field>
-                    <mat-select placeholder= "Choisir un {{type}}" formControlName="combattantsId">
+                    <mat-select placeholder= "Choisir un {{type}}" [(ngModel)]="tabSelected[i]._id"
+                    [ngModelOptions]="{standalone: true}">
                       <div *ngFor="let gladiateur of gladiateurList">
                           <mat-option *ngIf="gladiateur._type === type" [value]="gladiateur._id">
                             <span>{{gladiateur.identifiant.nom}}</span>
@@ -26,9 +27,10 @@
                     </mat-select>
                 </mat-form-field>
               </div>
+              <br/>
               <div fxLayoutAlign="center">
-                    <button fxFlex="50" mat-button type="button" (click)="editCombat()"
-                    [disabled]="!combatForm.valid">Valider le Combat</button>
+                    <button fxFlex="50" mat-raised-button type="button" color ="primary" (click)="editCombat()"
+                    [disabled]="!combatForm.valid || !isValid()">Valider le Combat</button>
               </div>
           </form>
         </mat-card-content>
