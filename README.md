@@ -1,4 +1,4 @@
-#God Arena
+##God Arena
 
 ## Introduction
 
@@ -29,8 +29,7 @@ Vous allez aussi devoir créer localement un base de données mongoDB sous le no
 
 ### Launch server
 
-Pour lancer l'application, run: `nodemon index.js` (dans fichier racine de l'application)
-                                `ng serve --proxy-config proxy.conf.json` (dans fichier `/client de l'application)
+Pour lancer l'application, run: `nodemon index.js` (dans fichier racine de l'application) et `ng serve --proxy-config proxy.conf.json` (dans fichier `/client de l'application`) dans deux terminals distincts.
 
 Le front sera disponible at _http://localhost:8080_ and the back at _http://localhost:3000_.
 
