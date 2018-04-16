@@ -33,12 +33,13 @@ export class CombatsNewComponent {
         this.combatForm = this.formBuilder.group({
             date: new FormControl('', [Validators.required]),
             lieu: new FormControl('', [Validators.required]),
-            custom: new FormControl('', [Validators.required]),
+            custom: new FormControl(''),
             typeCombattants: new FormControl('',[Validators.required])
         });
     }
 
     addCombat(){
+        this.combatForm.value.custom = this.combatForm.value.custom ? true : false
         this.combat = new Combat (this.combatForm.value.date, this.combatForm.value.lieu, this.combatForm.value.custom, this.combatForm.value.typeCombattants);
         this.combatService.addCombat(this.combat).subscribe(combat=>{
         });

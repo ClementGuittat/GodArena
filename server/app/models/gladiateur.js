@@ -10,10 +10,7 @@ const GladiateurSchema = new mongoose.Schema({
         nom: String,
         age: Number
     },
-    CV: {
-        nbVictoires: Number,
-        enCombat: Boolean
-    }
+    enCombat: { type: Boolean, default: false }
 }, GladiateurOptions);
 
 const Gladiateur = mongoose.model('Gladiateur', GladiateurSchema);

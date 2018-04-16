@@ -3,10 +3,13 @@ const { Gladiateur } = require('./gladiateur');
 
 const ArcherSchema = new mongoose.Schema({
     infosSpeciales: {
-        arme: {
+        listeArmes: {
+            type: [ String ],
+            default: [ 'Arc', 'Arbalète', 'Marteau' ]
+        },
+        armeChoisie: {
             type: String,
-            default: 'Arc',
-            enum: [ 'Arc', 'Arbalète' ]
+            default: 'Arc'
         }
     }
 });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, EmailValidator, Validators, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -16,7 +16,8 @@ export class CombatsEditComponent implements OnInit{
     combat: Combat;
     gladiateurType: string[];
     gladiateurList: Gladiateur[];
-    tabSelected: any[] = [];
+    tabSelected: Gladiateur[] = [];
+    armeSelected: string[] = [];
 
     constructor (
         private combatService: CombatService,
@@ -56,17 +57,17 @@ export class CombatsEditComponent implements OnInit{
     initTabSelected(){
         let i = 0;
         for (let type of this.gladiateurType){
-            this.tabSelected.push(this.combat.details.combattants[i] ? new Gladiateur(this.combat.details.combattants[i]) : "");
+            this.tabSelected.push(this.combat.details.combattants[i] ? new Gladiateur(this.combat.details.combattants[i]) : null);
+            this.armeSelected.push(this.combat.details.combattants[i] ? this.combat.details.combattants[i].infosSpeciales.armeChoisie : "");
             i++;
         }
-        console.log(this.tabSelected);
     }
 
     isValid(){
         let good = false;
         let i =0;
         for (let type of this.gladiateurType){
-            if (this.tabSelected[i]!=""){
+            if (this.tabSelected[i]){
                 good = true;
             }
             else {
@@ -78,14 +79,23 @@ export class CombatsEditComponent implements OnInit{
         return good;
     }
 
+    compareFn(item1,item2){
+      return item1._id == item2._id;
+    }
+
     editCombat() {
         this.combat.info.date = this.combatForm.controls.date.value;
         this.combat.info.lieu = this.combatForm.controls.lieu.value;
+        this.tabSelected.map( g => g.enCombat=true);
         this.combat.details.combattants = this.tabSelected;
-        console.log(this.tabSelected);
+        let i =0;
+        for (let arme of this.armeSelected){
+            this.combat.details.combattants[i].infosSpeciales.armeChoisie = this.armeSelected[i];
+            i++;
+        }
         this.combat.info.etat = 'Accepté';
-        //this.combatService.updateCombat(this.combat).subscribe(combat=>{
-        //});
+        this.combatService.updateCombat(this.combat).subscribe(combat=>{
+        });
         this.router.navigate(['/empereur'] );
     }
 }

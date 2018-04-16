@@ -52,9 +52,9 @@ async function updateCombat(updatedCombat) {
     logger.verbose('Combat service: modifier un combat');
     const idCombat = { _id: updatedCombat._id };
     let currentCombat;
+
     try {
         currentCombat = await Combat.findOneAndUpdate(idCombat, updatedCombat, { returnNewDocument: true });
-        //Await updatedCombat.save();
     } catch (err) {
         logger.warn(err);
     }

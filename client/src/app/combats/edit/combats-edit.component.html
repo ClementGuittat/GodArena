@@ -17,12 +17,22 @@
               </mat-form-field>
               <div *ngFor="let type of gladiateurType;let i=index ">
                 <mat-form-field>
-                    <mat-select placeholder= "Choisir un {{type}}" [(ngModel)]="tabSelected[i]._id"
-                    [ngModelOptions]="{standalone: true}">
+                    <mat-select placeholder= "Choisir un {{type}}" [(ngModel)]="tabSelected[i]" [compareWith]="compareFn" [ngModelOptions]="{standalone: true}">
                       <div *ngFor="let gladiateur of gladiateurList">
-                          <mat-option *ngIf="gladiateur._type === type" [value]="gladiateur._id">
+                          <mat-option *ngIf="gladiateur._type === type" [value]="gladiateur">
                             <span>{{gladiateur.identifiant.nom}}</span>
                           </mat-option>
+                      </div>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field *ngIf="combat.details.customisation && !tabSelected.includes(null)">
+                    <mat-select placeholder="Choisir une arme particulière" [(ngModel)]="armeSelected[i]" [ngModelOptions]="{standalone: true}">
+                      <div *ngFor="let glad of tabSelected">
+                        <div *ngFor="let arme of glad.infosSpeciales.listeArmes">
+                          <mat-option *ngIf="glad._type === type" [value]="arme" >
+                            <span> {{arme}} </span>
+                          </mat-option>
+                        </div>
                       </div>
                     </mat-select>
                 </mat-form-field>

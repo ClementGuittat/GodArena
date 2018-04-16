@@ -4,8 +4,14 @@ const { Gladiateur } = require('./gladiateur');
 
 const AnimalSchema = new mongoose.Schema({
     infosSpeciales: {
-        armure: { type: Boolean, default: false },
-        enchaine: { type: Boolean, default: false }
+        listeArmes: {
+            type: [ String ],
+            default: [ 'Armure', 'Enchaine', 'Muselière' ]
+        },
+        armeChoisie: {
+            type: String,
+            default: 'Armure'
+        }
     }
 });
 

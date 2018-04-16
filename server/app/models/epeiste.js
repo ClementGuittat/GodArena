@@ -4,10 +4,13 @@ const { Gladiateur } = require('./gladiateur');
 
 const EpeisteSchema = new mongoose.Schema({
     infosSpeciales: {
-        arme: {
+        listeArmes: {
+            type: [ String ],
+            default: [ 'Epee à deux mains', 'Epee à une main', 'Glaive' ]
+        },
+        armeChoisie: {
             type: String,
-            default: 'Epee a deux mains',
-            enum: [ 'Epee a deux mains', 'Epee à une main' ]
+            default: 'Epee à deux mains'
         }
     }
 });

@@ -4,10 +4,13 @@ const { Gladiateur } = require('./gladiateur');
 
 const LancierSchema = new mongoose.Schema({
     infosSpeciales: {
-        arme: {
+        listeArmes: {
+            type: [ String ],
+            default: [ 'Lance simple', 'Lance double', 'Harpon' ]
+        },
+        armeChoisie: {
             type: String,
-            default: 'Lance simple',
-            enum: [ 'Lance simple', 'Lance double' ]
+            default: 'Lance simple'
         }
     }
 });

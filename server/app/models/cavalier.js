@@ -3,15 +3,13 @@ const { Gladiateur } = require('./gladiateur');
 
 const CavalierSchema = new mongoose.Schema({
     infosSpeciales: {
-        arme: {
-            type: String,
-            default: 'Epee seule',
-            enum: [ 'Epee seule', 'Epee et bouclier' ]
+        listeArmes: {
+            type: [ String ],
+            default: [ 'Cheval', 'Rhino', 'Dromadaire' ]
         },
-        monture: {
+        armeChoisie: {
             type: String,
-            default: 'Cheval',
-            enum: [ 'Cheval', 'Rhino', 'Dromadaire', 'Ray-Ban' ]
+            default: 'Cheval'
         }
     }
 });

@@ -1,3 +1,5 @@
+import { Gladiateur } from './gladiateur';
+
 class Info {
   date: Date;
   lieu: string;
@@ -12,9 +14,9 @@ class Info {
 
 class Details{
   typeCombattants: string[];
-  combattants: string[];
+  combattants: Gladiateur[];
   customisation: boolean;
-  constructor (typeCombattants: string[], combattants: string[], customisation: boolean){
+  constructor (typeCombattants: string[], combattants: Gladiateur[], customisation: boolean){
     this.typeCombattants = typeCombattants;
     this.combattants = combattants;
     this.customisation = customisation;
@@ -27,7 +29,7 @@ export class Combat {
     info: Info;
     details: Details;
 
-    constructor (date: Date, lieu: string, customisation: boolean, typeCombattants: string[], etat: string = "En Attente", combattants: string[] = []) {
+    constructor (date: Date, lieu: string, customisation: boolean, typeCombattants: string[], etat: string = "En Attente", combattants: Gladiateur[] = []) {
       this.info = new Info (date, lieu, etat);
       this.details = new Details (typeCombattants, combattants, customisation);
     }

@@ -7,14 +7,14 @@ class Identifiant {
     this.age = age;
   };
 }
+class InfosSpeciales {
+  listeArmes: string[];
+  armeChoisie: string;
 
-class CV{
-  nbVictoires: Number;
-  enCombat: boolean;
-  constructor (nbVictoires: Number, enCombat: boolean){
-    this.nbVictoires = nbVictoires;
-    this.enCombat = enCombat;
-  };
+  constructor(listeArmes: string[], armeChoisie: string){
+    this.listeArmes = listeArmes;
+    this.armeChoisie = armeChoisie;
+  }
 }
 
 export class Gladiateur {
@@ -22,12 +22,9 @@ export class Gladiateur {
     _id?: string;
     _type?: string;
     identifiant: Identifiant;
-    CV: CV;
+    infosSpeciales?: InfosSpeciales;
+    enCombat: boolean;
 
-    /*constructor (nom: string, age: Number, nbVictoires: Number = 0, enCombat: boolean = false) {
-      this.identifiant = new Identifiant (nom, age);
-      this.CV = new CV (nbVictoires, enCombat);
-    }*/
     constructor(values: Object = {}) {
         Object.assign(this, values);
     }

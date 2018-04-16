@@ -44,6 +44,25 @@ async function createGladiateur(newGladiateur) {
     }
     return nouveauGladiateur;
 }
+/**
+ * Modifier des gladiateurs
+ *
+ * @param updatedGladiateurs {Array<Gladiateur>}
+ * @return {Promise< Array<Gladiateur> >} les Gladiateurs modifiés
+ */
+async function updateGladiateurs(updatedGladiateurs) {
+    logger.verbose('Combat service: modifier des gladiateurs');
+    let tab = [];
+    try {
+        for (const g of updatedGladiateurs) {
+            tab.push(await Gladiateur.findOneAndUpdate({ _id: g._id }, g, { new: true }));
+        }
+
+    } catch (err) {
+        logger.warn(err);
+    }
+    return tab;
+}
 
 /**
  * Initialiser les gladiateurs dans la base de données
@@ -53,17 +72,19 @@ async function createGladiateur(newGladiateur) {
  */
 async function initGladiateurs(tabGladiateurs) {
     logger.verbose('Gladiateur service: initialiser les gladiateurs dans la BD');
+    let res;
     try {
-        await Gladiateur.create(tabGladiateurs);
+        res = await Gladiateur.create(tabGladiateurs);
     } catch (err) {
         if (err) logger.warn('Erreur lors de l\'initialisation des données');
     }
-    return tabGladiateurs.length;
+    return res;
 }
 
 module.exports = {
     getAllGladiateurs,
     createGladiateur,
     getGladiateursByType,
+    updateGladiateurs,
     initGladiateurs
 };

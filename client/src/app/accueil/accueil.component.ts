@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GladiateurService } from '../_services/gladiateur.service';
 
 @Component({
   templateUrl: './accueil.component.html',
@@ -6,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AccueilComponent {
   title = 'GodArena';
+
+  constructor(public gladiateurService: GladiateurService){ }
+
+    initBD(){
+      this.gladiateurService.initBase().subscribe(res=>{
+        console.log(res);
+      });
+    }
 }

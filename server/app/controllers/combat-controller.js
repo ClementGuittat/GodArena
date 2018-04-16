@@ -1,5 +1,6 @@
 const combatService = require('../services/combat-service');
-const { Combat } = require('../models');
+const gladiateurController = require('./gladiateur-controller');
+const { Combat, Gladiateur } = require('../models');
 
 /**
  * Récupère tous les combats de la base de données
@@ -54,6 +55,7 @@ async function updateCombat(req, res) {
             _id: req.params.id
         }
     );
+    const updatedGladiateurs = await gladiateurController.updateGladiateurs(req.body.details.combattants);
     updatedCombat = await combatService.updateCombat(updatedCombat);
     res.json(updatedCombat);
 }
