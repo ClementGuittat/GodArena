@@ -55,7 +55,6 @@ async function updateCombat(req, res) {
             _id: req.params.id
         }
     );
-    const updatedGladiateurs = await gladiateurController.updateGladiateurs(req.body.details.combattants);
     updatedCombat = await combatService.updateCombat(updatedCombat);
     res.json(updatedCombat);
 }

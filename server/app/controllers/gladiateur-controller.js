@@ -35,9 +35,9 @@ async function getGladiateursByType(req, res) {
  * @param res Response
  * @return {Promise.< Array<Gladiateur> >}
  */
-async function updateGladiateurs(gladiateurs) {
+async function updateGladiateurs(req, res) {
     let nouveauGladiateur = [];
-    gladiateurs.map(g=> {
+    req.body.map(g=> {
         const typeGladiateur = g._type;
 
         switch (typeGladiateur) {
@@ -59,7 +59,7 @@ async function updateGladiateurs(gladiateurs) {
         }
     });
     nouveauGladiateur = await gladiateurService.updateGladiateurs(nouveauGladiateur);
-    return nouveauGladiateur;
+    res.json(nouveauGladiateur);
 }
 
 /**

@@ -110,8 +110,10 @@ export class CombatsEditComponent implements OnInit{
             i++;
         }
         this.combat.info.etat = 'Accepté';
-        this.combatService.updateCombat(this.combat).subscribe(combat=>{
-        });
-        this.router.navigate(['/empereur'] );
+        this.gladiateurService.updateGladiateurs(this.combat.details.combattants).subscribe(resGlad =>{
+            this.combatService.updateCombat(this.combat).subscribe(combat=>{
+                this.router.navigate(['/empereur'] );
+            })
+        })
     }
 }

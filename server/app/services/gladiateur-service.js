@@ -28,23 +28,6 @@ async function getGladiateursByType(typeArray) {
 }
 
 /**
- * Créer le gladiateur
- *
- * @param newGladiateur {Gladiateur}
- * @return {Promise<Gladiateur>} le Gladiateur créé
- */
-async function createGladiateur(newGladiateur) {
-    logger.verbose('Gladiateur service: creer un gladiateur');
-
-    let nouveauGladiateur;
-    try {
-        nouveauGladiateur = await newGladiateur.save();
-    } catch (err) {
-        if (err) logger.warn(err);
-    }
-    return nouveauGladiateur;
-}
-/**
  * Modifier des gladiateurs
  *
  * @param updatedGladiateurs {Array<Gladiateur>}
@@ -55,7 +38,8 @@ async function updateGladiateurs(updatedGladiateurs) {
     let tab = [];
     try {
         for (const g of updatedGladiateurs) {
-            tab.push(await Gladiateur.findOneAndUpdate({ _id: g._id }, g, { new: true }));
+            tab.push(await Gladiateur.findOneAndUpdate({ _id: g._id }, g, { new: true })); // TO FIX
+            // la clé armeChoisie ne veut pas de modifier sans que je comprenne pourquoi
         }
 
     } catch (err) {
@@ -83,7 +67,6 @@ async function initGladiateurs(tabGladiateurs) {
 
 module.exports = {
     getAllGladiateurs,
-    createGladiateur,
     getGladiateursByType,
     updateGladiateurs,
     initGladiateurs

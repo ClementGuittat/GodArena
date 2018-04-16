@@ -54,7 +54,7 @@ async function updateCombat(updatedCombat) {
     let currentCombat;
 
     try {
-        currentCombat = await Combat.findOneAndUpdate(idCombat, updatedCombat, { returnNewDocument: true });
+        currentCombat = await Combat.findOneAndUpdate(idCombat, updatedCombat, { new: true });
     } catch (err) {
         logger.warn(err);
     }
