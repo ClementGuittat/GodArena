@@ -29,39 +29,6 @@ async function getGladiateursByType(req, res) {
 }
 
 /**
- * Récupère les informations du front et crée un gladiateur selon son type
- *
- * @param req Request
- * @param res Response
- * @return {Promise.<void>} Nothing
- */
-async function createGladiateur(req, res) {
-
-    let nouveauGladiateur;
-    const typeGladiateur = req.body._type;
-
-    switch (typeGladiateur) {
-        case 'Animal':
-            nouveauGladiateur = new Animal(req.body);
-            break;
-        case 'Archer':
-            nouveauGladiateur = new Archer(req.body);
-            break;
-        case 'Cavalier':
-            nouveauGladiateur = new Cavalier(req.body);
-            break;
-        case 'Epeiste':
-            nouveauGladiateur = new Epeiste(req.body);
-            break;
-        case 'Lancier':
-            nouveauGladiateur = new Lancier(req.body);
-            break;
-    }
-    nouveauGladiateur = await gladiateurService.createGladiateur(nouveauGladiateur);
-    res.json(nouveauGladiateur);
-}
-
-/**
  * Récupère un tableau de gladiateur et les mets à jour
  *
  * @param req Request
@@ -136,7 +103,6 @@ async function initGladiateurs(req, res) {
 module.exports = {
     getAllGladiateurs,
     getGladiateursByType,
-    createGladiateur,
     updateGladiateurs,
     initGladiateurs
 };

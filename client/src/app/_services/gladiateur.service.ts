@@ -17,11 +17,18 @@ export class GladiateurService {
   constructor(private http: HttpClient){
     this.initBody();
   }
-
+  /**
+   *
+   * Récupère tous les gladiateurs d'un type précis
+   */
   getGladiateursByType(type: string[]){
       return this.http.get<Gladiateur[]>('/api/gladiateur/type?array='+ JSON.stringify(type));
   }
 
+  /**
+   *
+   * Initialise la base de données avec les gladiateurs codés en dur
+   */
   initBase(): Observable<Gladiateur[]> {
       return this.http.post<Gladiateur[]>('/api/gladiateur/init', this.body, httpOptions);
   }

@@ -29,6 +29,10 @@ export class CombatsEditComponent implements OnInit{
         this.createForm();
     }
 
+    /**
+     *
+     * Création du formulaire pour modifier les informations d'un combat
+     */
     createForm(){
         this.combatForm = this.formBuilder.group({
             date: new FormControl('', [Validators.required]),
@@ -54,6 +58,10 @@ export class CombatsEditComponent implements OnInit{
         });
     }
 
+    /*
+     *
+     * Initialise les attibuts tabSelected et armeSelected avec les valeurs déjà existantes de gladiateurs choisies ou d'armes choisies
+     */
     initTabSelected(){
         let i = 0;
         for (let type of this.gladiateurType){
@@ -63,6 +71,10 @@ export class CombatsEditComponent implements OnInit{
         }
     }
 
+    /**
+     *
+     * Vérifie que les champs gladiateurs sont remplies avant de permettre la customisation d'un combattant
+     */
     isValid(){
         let good = false;
         let i =0;
@@ -79,6 +91,10 @@ export class CombatsEditComponent implements OnInit{
         return good;
     }
 
+    /**
+     *
+     * Permet de dire sur quel critère d'un gladiateur le 2 way binding doit s'effectuer
+     */
     compareFn(item1,item2){
       return item1._id == item2._id;
     }
